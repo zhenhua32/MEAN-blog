@@ -1,0 +1,15 @@
+li.mark {
+	padding: 10px;
+	font-size: 1.75rem;
+	border-right: 1px black solid;
+}
+
+li.mark a:hover {
+	color: #ff9800;
+}
+
+/*body {
+	background: url(../a.png);
+	background-repeat: repeat;
+}*/
+
