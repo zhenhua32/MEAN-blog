@@ -7,7 +7,7 @@ var crypto = require('crypto');
 /* login */
 router.get('/', function (req, res, next) {
   if (req.session.user) {
-    res.redirect('/user/'+req.session.user.name);
+    res.redirect('/user/'+req.session.user.name+'/');
   } else {
     if (req.cookies.loginMsg) {
       res.render('login', { loginMsg: req.cookies.loginMsg });

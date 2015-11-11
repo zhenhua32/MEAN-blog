@@ -1,35 +1,34 @@
 var mongoose = require('mongoose');
 
-var userSchema = mongoose.Schema({
-		name: {
+var postSchema = mongoose.Schema({
+		title: {
 			type: String,
 			trim: true,
-			unique: true,
 			required: true
 		},
-		password: {
+		author: {
 			type: String,
 			required: true
 		},
-		email: {
+		body: {
 			type: String,
-			match: /.+\@.+\..+/,
-			lowercase: true
+			required: true
 		},
 		date: {
 			type: Date,
 			default: new Date()
-		}
+		},
+		comment: [{ body: String, date: Date }]
 });
 
 //Query#findOne([criteria], [projection], [callback])
-userSchema.statics.findOneBy = function(field, value, callback) {
+postSchema.statics.findOneBy = function(field, value, callback) {
 	return this.findOne({field: value}, callback);
 }
 
 //Mongoose#model(name, [schema], [collection], [skipInit])
-var User = mongoose.model('User', userSchema, 'user');
+var Post = mongoose.model('Post', postSchema, 'post');
 	
-module.exports = User;
+module.exports = Post;
 
 

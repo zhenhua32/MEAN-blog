@@ -12,8 +12,8 @@ var options = {
 	maxAge: 1000 * 60 * 10
 }
 
-//need the real one
-router.get('/', function (req, res, next) {
+//$ is the end of line, ^ is the begin of line
+router.get('/*/$', function (req, res, next) {
 	if (req.session.user) {
 		res.render('user', { userName: req.session.user.name });
 	} else {
@@ -23,8 +23,13 @@ router.get('/', function (req, res, next) {
 });
 
 
-router.get('/content', function (req, res, next) {
-
+router.get('/*/content$', function (req, res, next) {
+	if (req.session.user) {
+		res.render('user_content', { userName: req.session.user.name });
+	} else {
+		res.cookie('loginMsg', '用户未登录, 请登录', setting.options);
+		res.redirect('/login');
+	}
 });
 
 router.get('/info', function (req, res, next) {
