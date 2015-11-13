@@ -1,6 +1,17 @@
 var mongoose = require('mongoose');
 
-var postSchema = mongoose.Schema({
+var commentSchema = new mongoose.Schema({
+	body: {
+		type: String,
+		required: true
+	},
+	date: {
+		type: Date,
+		default: new Date()
+	}
+});
+
+var postSchema = new mongoose.Schema({
 		title: {
 			type: String,
 			trim: true,
@@ -18,7 +29,7 @@ var postSchema = mongoose.Schema({
 			type: Date,
 			default: new Date()
 		},
-		comment: [{ body: String, date: Date }]
+		comments: [commentSchema]
 });
 
 //Query#findOne([criteria], [projection], [callback])
