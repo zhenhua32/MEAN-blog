@@ -8,7 +8,22 @@
   <link type="text/css" rel="stylesheet" href="/css/materialize.min.css" media="screen,projection" />
 
   <link type="text/css" rel="stylesheet" href="/css/diy.css" media="screen,projection">
-
+  
+  <script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
+  
+  <script type="text/javascript">
+    $(document).ready(function() {
+      //$('.paper_content:eq(0)').addClass('paper_focus');
+      //$('.paper_content:gt(0)').addClass('paper_focus_not');
+      $('.paper_content:eq(0)').show();
+      $('.paper_content:gt(0)').hide();
+      $('.card:eq(0)').addClass('blue');
+      $('.card:gt(0)').addClass('grey');
+     });
+      
+    
+   </script>
+  
   <!--Let browser know website is optimized for mobile-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -45,8 +60,8 @@
     <div class="col s2 fixed">
       <div class="container">
         <ul>
-          <li class="mark"><a href="./" class="">主页</a></li>
-          <li class="mark"><a href="./content" class="light-green-text">文章</a></li>
+          <li class="mark"><a href="/user/{{userName}}" class="">主页</a></li>
+          <li class="mark"><a href="/user/{{userName}}/content" class="light-green-text">文章</a></li>
           <li class="mark"><a href="#" class="">信息</a></li>
           <li class="mark"><a href="#" class="">发现</a></li>
           <li class="mark"><a href="#" class="">更多</a></li>
@@ -56,63 +71,38 @@
 
     <div class="col s3">
       <p></p>
-      <a class="waves-effect waves-light btn-large"><i class="material-icons left">note_add</i>写文章</a>
-      <div class="card blue">
-        <div class="card-content white-text">
-          <span class="card-title">Title</span>
+      <a class="waves-effect waves-light btn-large" href="./editNew"><i class="material-icons left">note_add</i>写文章</a>
+      
+      {{! what should look like
+        <div class="card">
+          <div class="card-content white-text">
+            <span class="card-title">Title</span>
+          </div>
+          <div class="card-action">
+            <a href="#">User</a>
+            <span>Time</span>
+            <a href="#" class="right"><i class="material-icons right">edit</i>编辑</a>
+          </div>
         </div>
-        <div class="card-action">
-          <a href="#">User</a>
-          <a href="#">Time</a>
-          <a href="#" class="right"><i class="material-icons right">edit</i>编辑</a>
-        </div>
-      </div>
-
-      <div class="card grey">
-        <div class="card-content white-text">
-          <span class="card-title">Title</span>
-        </div>
-        <div class="card-action">
-          <a href="#">User</a>
-          <a href="#">Time</a>
-        </div>
-      </div>
-
-      <div class="card grey">
-        <div class="card-content white-text">
-          <span class="card-title">Title</span>
-        </div>
-        <div class="card-action">
-          <a href="#">User</a>
-          <a href="#">Time</a>
-        </div>
-      </div>
-
-      <div class="card grey">
-        <div class="card-content white-text">
-          <span class="card-title">Title</span>
-        </div>
-        <div class="card-action">
-          <a href="#">User</a>
-          <a href="#">Time</a>
-        </div>
-      </div>
+      }}
+      
+      {{#userPaperList Paper}} {{/userPaperList}}
 
     </div>
-
-    <div class="col s7">
+    
+    {{! what should look like
+      <div class="col s7 paper_content">
       <h1>Title</h1>
       <p>Textareas allow larger expandable user input. The border should light up simply and clearly indicating which field
         the user is currently editing. You must have a .input-field div wrapping your input and label. This helps our jQuery
         animate the label. This is only used in our Input and Textarea form elements.</p>
-    </div>
+      </div>
+    }}
+    
+    {{#userPaperContent Paper}} {{/userPaperContent}}
+
+    
   </div>
-
-
-
-
-
-
 
 
 
@@ -156,6 +146,21 @@
   <script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
   <script type="text/javascript" src="/s/materialize.min.js"></script>
   <script type="text/javascript" src="/js/init.js"></script>
+  
+  <script type="text/javascript">
+    $('.card').click(function() {
+      $('.blue').removeClass('blue').addClass('grey');
+      $(this).removeClass('grey').addClass('blue');
+      
+      var index = $(this).index('.card');
+      $('.paper_content').hide();
+      $('.paper_content').eq(index).show();
+    });
+    
+    
+    
+  </script>
+  
 </body>
 
 </html>

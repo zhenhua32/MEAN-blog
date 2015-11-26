@@ -8,6 +8,14 @@ li.mark a:hover {
 	color: #ff9800;
 }
 
+.paper_focus {
+	visibility: visible;
+}
+
+.paper_focus_not {
+	visibility: hidden;
+}
+
 /*body {
 	background: url(../a.png);
 	background-repeat: repeat;

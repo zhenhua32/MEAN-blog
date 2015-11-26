@@ -7,7 +7,7 @@ var crypto = require('crypto');
 /* login */
 router.get('/', function (req, res, next) {
   if (req.session.user) {
-    res.redirect('/user/'+req.session.user.name+'/');
+    res.redirect('/user/' + req.session.user.name);
   } else {
     if (req.cookies.loginMsg) {
       res.render('login', { loginMsg: req.cookies.loginMsg });
@@ -30,7 +30,7 @@ router.post('/', function (req, res, next) {
       if (userone.password === sha256.update(password).digest('hex')) {
         //start a  session
         req.session.user = userone;
-        res.redirect('/user/' + name);
+        res.redirect('/user/' + name + '/');
       } else {
         res.render('login', { loginMsg: "密码错误, 重新登陆" });
       }

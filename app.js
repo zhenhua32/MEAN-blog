@@ -12,6 +12,8 @@ var connection = require('./model/Mconnection');
 
 // configure
 var setting = require('./set');
+//hbs handlebars registerHelper 
+var helper = require('./views/TemplateHelper');
 
 // router define
 var routes = require('./routes/index');

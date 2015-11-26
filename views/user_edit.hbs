@@ -12,7 +12,7 @@
   <!--Let browser know website is optimized for mobile-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>用户主页-{{userName}}</title>
+  <title>编辑-{{paperTitle}}</title>
 </head>
 
 <body>
@@ -40,36 +40,25 @@
     </div>
   </nav>
 
-  <!--用户界面-->
-  <div class="row">
-    <div class="col s2 fixed">
-      <div class="container">
-        <ul>
-          <li class="mark"><a href="/user/{{userName}}" class="light-green-text">主页</a></li>
-          <li class="mark"><a href="/user/{{userName}}/content" class="">文章</a></li>
-          <li class="mark"><a href="#" class="">用户信息</a></li>
-          <li class="mark"><a href="#" class="">发现</a></li>
-          <li class="mark"><a href="#" class="">更多</a></li>
-        </ul>
+  <!--编辑-->
+
+  <div class="container">
+
+    <form method="post">
+      <div class="input-field">
+        <input id="title" name="title" type="text" readonly value="{{paperTitle}}" class="validate">
+        <label for="title">标题不支持修改</label>
       </div>
-    </div>
+      <div class="input-field">
+        <textarea id="abody" name="body" class="materialize-textarea">{{paperBody}}</textarea>
+        <label for="abody">想好怎么修改了吗?</label>
+      </div>
+      <button class="btn waves-effect waves-light" type="submit">完成
+        <i class="material-icons right">send</i>
+      </button>
+    </form>
 
-    <div class="col s9">
-      <p>现在你可以做这些:</p>
-    </div>
   </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -99,8 +88,6 @@
       </div>
     </div>
   </footer>
-
-
 
 
   <!--Import jQuery before materialize.js-->
