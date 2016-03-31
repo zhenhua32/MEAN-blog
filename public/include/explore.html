@@ -1,0 +1,46 @@
+<md-list ng-controller="exploreC">
+    <!--<md-subheader class="md-no-sticky">
+        共有: {{sum}}篇文章, 排序:
+        <select ng-model="orderProp">
+            <option value="-createdAt">最近创建</option>
+            <option value="createdAt">最早创建</option>
+            <option value="-updatedAt">最近更新</option>
+        </select>
+    </md-subheader>-->
+
+    <md-list-item class="md-3-line" ng-repeat="n in pages" layout-padding>
+        <img ng-src="{{n.author.avatar}}" width="64px" height="64px" alt="{{n.author.name}}" />
+        <div class="md-list-item-text" layout="column">
+            <h3>{{n.title}}</h3>
+            <h4>{{n.author.name}}</h4>
+            <p>创建于: {{n.createdAt | date:'yyyy-MM-dd HH:mm:ss Z'}}</p>
+        </div>
+        <md-button class="md-icon-button md-button-80" aria-label="Read more Button" ng-click="readMore($event, n)" hide show-gt-xs>
+            <md-icon md-font-set="material-icons md-48">more</md-icon>
+        </md-button>
+
+        <!-- for mobile -->
+        <md-button class="md-icon-button" aria-label="Read more Button" ng-click="readMore($event, n)" hide-gt-xs>
+            <md-icon md-font-set="material-icons">more</md-icon>
+        </md-button>
+
+    </md-list-item>
+
+    <sapn>当前是第 {{current}} 页, 共有 {{pageNumber}} 页 </sapn>
+    <md-button class="md-icon-button md-button-80" aria-label="First page Button" ng-click="back()" ng-disabled="current<=1"
+    hide show-gt-xs>
+        <md-icon md-font-set="material-icons md-48">chevron_left</md-icon>
+    </md-button>
+    <md-button class="md-icon-button md-button-80" aria-label="Last page Button" ng-click="go()" ng-disabled="current>=pageNumber"
+    hide show-gt-xs>
+        <md-icon md-font-set="material-icons md-48">chevron_right</md-icon>
+    </md-button>
+    <!-- for mobile -->
+    <md-button class="md-icon-button" aria-label="First page Button" ng-click="back()" ng-disabled="current<=1" hide-gt-xs>
+        <md-icon md-font-set="material-icons">chevron_left</md-icon>
+    </md-button>
+
+    <md-button class="md-icon-button" aria-label="Last page Button" ng-click="go()" ng-disabled="current>=pageNumber" hide-gt-xs>
+        <md-icon md-font-set="material-icons">chevron_right</md-icon>
+    </md-button>
+</md-list>

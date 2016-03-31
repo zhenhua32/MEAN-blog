@@ -1,6 +1,8 @@
+'use strict';
+
 module.exports = {
-	cookieSecret: 'markblog',
-	db: 'blog',
+	cookieSecret: 'towrite',
+	db: 'towrite',
 	host: 'localhost',
 	port: 27017,
 	//cookie options, write cookie with res.cookie, read cookie with req.cookies

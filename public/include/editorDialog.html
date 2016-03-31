@@ -1,0 +1,27 @@
+<md-dialog aria-label="Editor dialog" flex>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>编辑</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-font-set="material-icons">close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content class="md-dialog-content">
+        <form name="pageForm" ng-submit="save()" layout="column" layout-align="center center">
+            <md-input-container style="width: 60%">
+                <label>标题</label>
+                <input name="title" ng-model="newPage.title" required md-maxlength="30">
+            </md-input-container>
+
+            <textarea ui-tinymce="tinymceOptions" name="content" ng-model="newPage.content"></textarea>
+        </form>
+    </md-dialog-content>
+    <md-dialog-actions>
+        <md-button class="md-raised md-accent" ng-click="update()" ng-disabled="!newPage.title || !newPage.content">
+            <md-icon md-font-set="material-icons">save</md-icon>
+            更新
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

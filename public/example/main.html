@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+    <title>main</title>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Angular Material style sheet -->
+    <link rel="stylesheet" href="/ref/angular-material.min.css">
+    <link rel="stylesheet" href="/css/icon.css">
+    <link rel="stylesheet" href="/css/diy.css">
+
+    <!-- Angular Material requires Angular.js Libraries -->
+    <script src="/ref/angular.min.js"></script>
+    <script src="/ref/angular-animate.min.js"></script>
+    <script src="/ref/angular-aria.min.js"></script>
+    <script src="/ref/angular-messages.min.js"></script>
+    <!-- Angular Material Library -->
+    <script src="/ref/angular-material.min.js"></script>
+    <!-- Your application bootstrap  -->
+    <script src="/js/app.js"></script>
+    <script src="/js/controller.js"></script>
+    <script src="/js/service.js"></script>
+    <!-- tinymce -->
+    <script src="/ref/tinymce/tinymce.min.js"></script>
+    <!--<script src="/js/init.js"></script>-->
+    <script src="/ref/angular-ui-tinymce.js"></script>
+
+</head>
+
+<body ng-app="markApp" ng-cloak>
+
+    <div layout="row" ng-controller="sidenavC">
+        <!-- sidenav -->
+        <md-sidenav flex="40" flex-gt-sm="20" md-component-id="sidenavLeft" md-is-locked-open="$mdMedia('gt-sm')">
+            <div class="nav-header md-headline">
+                <img src="img/logo.svg"> {{username}}
+            </div>
+
+            <div>
+                <md-list>
+                    <md-list-item>
+                        <md-button layout-fill class="md-button-36">
+                            <md-icon md-font-set="material-icons md-36">create</md-icon>
+                            新文章
+                        </md-button>
+                    </md-list-item>
+                    <md-list-item>
+                        <md-button layout-fill class="md-button-36">
+                            <md-icon md-font-set="material-icons md-36">archive</md-icon>
+                            所有文章
+                        </md-button>
+                    </md-list-item>
+                    <md-list-item>
+                        <md-button layout-fill class="md-button-36">
+                            <md-icon md-font-set="material-icons md-36">explore</md-icon>
+                            探索
+                        </md-button>
+                    </md-list-item>
+                </md-list>
+            </div>
+
+        </md-sidenav>
+
+
+
+        <!-- main content -->
+        <md-content flex>
+            <!-- toolbar -->
+            <md-toolbar>
+                <span>
+                    <md-button class="md-icon-button" ng-click="openLeftMenu()" hide-gt-sm>
+                        <md-icon md-font-set="material-icons">menu</md-icon>
+                    </md-button>
+                </span>
+
+            </md-toolbar>
+            
+            <!-- editor -->
+            <form name="pageForm" ng-controller="saveC" ng-submit="save()" layout="column" layout-align="center center">
+                <md-input-container style="width: 60%">
+                    <label>标题</label>
+                    <input name="title" ng-model="title" required md-maxlength="30">
+                </md-input-container>
+                
+                <textarea ui-tinymce="tinymceOptions" name="content" ng-model="content"></textarea>
+                
+                <md-button class="md-raised md-accent" type="submit">
+                    <md-icon md-font-set="material-icons">done</md-icon>
+                    发布
+                </md-button>
+            </form>
+
+
+        </md-content>
+    </div>
+
+
+
+</body>
+
+</html>

@@ -1,25 +1,25 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-// use cookie and session
-var session = require('express-session');
-var Cookiestore = require('connect-mongo')(session);
+'use strict';
+
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+
 // connect the mongodb
-var connection = require('./model/Mconnection');
+const connection = require('./model/Mconnection');
+// use session
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
 // configure
-var setting = require('./set');
-//hbs handlebars registerHelper 
-var helper = require('./views/TemplateHelper');
+const set = require('./set');
 
-// router define
-var routes = require('./routes/index');
-var login = require('./routes/login');
-var user = require('./routes/user');
-var logout = require('./routes/logout');
+// route define
+const routes = require('./routes/index');
+const api = require('./routes/api');
+const resources = require('./routes/resources');
 
 var app = express();
 
@@ -27,42 +27,39 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
-/*app.use is in order, use connect's middleware */
-//use favicon
+// uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', 'favicon.jpg')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), {
+    maxAge: 1000 * 60 * 60 * 24 * 70
+}));
 
 //save cookie  in  mongodb
 app.use(session({
-  cookie: { maxAge: 1000 * 60 * 60 * 24 * 7},
-  secret: setting.cookieSecret,
-  name: 'mark-session',
-  resave: true,
-  saveUninitialized: false,
-  store: new Cookiestore({
-    db: setting.db,
-    host: setting.host,
-    port: setting.port
-  })
+    cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 },
+    secret: set.cookieSecret,
+    name: 'mark',
+    resave: true,
+    saveUninitialized: false,
+    store: new MongoStore({
+        url: 'mongodb://' + set.host + ':' + set.port + '/' + set.db
+    })
 }));
 
-//router use
+//router use, should be last in app.use()
 app.use('/', routes);
-app.use('/login', login);
-app.use('/user', user);
-app.use('/logout', logout);
+app.use('/api', api);
+app.use('/resources', resources);
 
-
-
+// remember the order, so, 404 handler is after other path
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+app.use(function (req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 // error handlers
@@ -70,23 +67,25 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
+    app.use(function (err, req, res, next) {
+        res.status(err.status || 500);
+        res.json({
+            success: false,
+            message: err.message,
+            error: err
+        });
     });
-  });
 }
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+app.use(function (err, req, res, next) {
+    res.status(err.status || 500);
+    res.json({
+        success: false,
+        message: err.message,
+        error: {}
+    });
 });
 
 

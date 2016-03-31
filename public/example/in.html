@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+    <title>Welcome</title>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Angular Material style sheet -->
+    <link rel="stylesheet" href="/ref/angular-material.min.css">
+    <link rel="stylesheet" href="/css/icon.css">
+
+    <!-- Angular Material requires Angular.js Libraries -->
+    <script src="/ref/angular.min.js"></script>
+    <script src="/ref/angular-animate.min.js"></script>
+    <script src="/ref/angular-aria.min.js"></script>
+    <script src="/ref/angular-messages.min.js"></script>
+    <!-- Angular Material Library -->
+    <script src="/ref/angular-material.min.js"></script>
+    <!-- Your application bootstrap  -->
+    <script src="/js/app.js"></script>
+    <script src="/js/controller.js"></script>
+    <script src="/js/service.js"></script>
+</head>
+
+<body ng-app="markApp" ng-cloak>
+
+
+    <div layout="column" layout-align="center center">
+        <h1 class="md-display-4">welcome to the new world</h1>
+        <!--新用户注册-->
+        <form name="newForm" ng-controller="registerC" ng-submit="register()">
+            <md-input-container>
+                <label>用户名</label>
+                <input name="newName" ng-model="newName" required md-maxlength="10" minlength="4">
+                <div ng-messages="newForm.newName.$error" ng-show="newForm.newName.$dirty">
+                    <div ng-message="required">用户名必填!</div>
+                    <div ng-message="md-maxlength">用户名太长了!</div>
+                    <div ng-message="minlength">用户名太短了!</div>
+                </div>
+            </md-input-container>
+            <md-input-container>
+                <label>密码</label>
+                <input name="newPassword" type="password" ng-model="newPassword" required md-maxlength="20" minlength="4">
+                <div ng-messages="newForm.newPassword.$error" ng-show="newForm.newPassword.$dirty">
+                    <div ng-message="required">密码必填!</div>
+                    <div ng-message="md-maxlength">密码太长了!</div>
+                    <div ng-message="minlength">密码太短了!</div>
+                </div>
+            </md-input-container>
+            <md-input-container>
+                <label>邮箱</label>
+                <input name="newEmail" type="email" ng-model="newEmail" required>
+                <div ng-messages="newForm.newEmail.$error" ng-show="newForm.newEmail.$dirty">
+                    <div ng-message="required">邮箱必填!</div>
+                </div>
+            </md-input-container>
+            <md-button class="md-raised md-primary" type="submit">
+                <md-icon md-font-set="material-icons">done</md-icon>
+                注册
+            </md-button>
+        </form>
+        
+        <h2 class="md-display-3">已有帐号? 快速登录!</h2>
+        <!--用户登录-->
+        <form name="loginForm" ng-controller="loginC" ng-submit="login()">
+            <md-input-container>
+                <label>用户名</label>
+                <input name="userName" ng-model="userName" required md-maxlength="10" minlength="4">
+            </md-input-container>
+            <md-input-container>
+                <label>密码</label>
+                <input name="userPassword" ng-model="userPassword" required md-maxlength="20" minlength="4">
+            </md-input-container>
+            <md-button class="md-raised md-primary" type="submit">
+                <md-icon md-font-set="material-icons">done</md-icon>
+                登录
+            </md-button>
+        </form>
+    </div>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<div layout="row" ng-controller="sidenavC" id="main">
+    <!-- sidenav row1 -->
+    <md-sidenav flex="40" flex-gt-sm="20" class="site-sidenav md-sidenav-left" md-component-id="sidenavLeft" md-is-locked-open="$mdMedia('gt-sm')">
+        <div class="nav-header md-headline" layout="column" layout-align="center center">
+            <!--<img src="img/logo.svg">-->
+            <img id='icon' ng-src='{{avatar}}'> </img>
+            <!--<canvas id='icon'></canvas>-->
+            <!--  user span with menu -->
+            <diy-user username="username" logout="logout()" hide show-gt-sm></diy-user>
+        </div>
+
+        <md-content layout-padding>
+            <md-list>
+                <md-list-iten ng-repeat="n in items">
+                    <md-button class="md-button-36" ng-click="select(n.index)">
+                        <md-icon md-font-set="material-icons md-36">{{n.icon}}</md-icon>
+                        {{n.title}}
+                    </md-button>
+                </md-list-iten>
+            </md-list>
+        </md-content>
+
+    </md-sidenav>
+
+
+
+    <!-- main content row2 -->
+    <div layout="column" flex>
+        <!-- toolbar -->
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button" aria-label="Menu Button" ng-click="openLeftMenu()" hide-gt-sm>
+                    <md-icon md-font-set="material-icons">menu</md-icon>
+                </md-button>
+                <h2>
+                    <span>{{toolbarTitle}}</span>
+                </h2>
+                <span flex></span>
+                <span hide-gt-sm>{{username}}</span>
+                <!--  more menu -->
+                <diy-moremenu></diy-moremenu>
+
+            </div>
+        </md-toolbar>
+        <!-- md-scroll-y change the overflow-y:auto -->
+        <md-content md-scroll-y flex>
+            <md-tabs  md-selected="selectedIndex" md-dynamic-height md-swipe-content md-autoselect>
+                <md-tab ng-repeat="n in tabs">
+                    <md-tab-label>
+                        {{n.title}}
+                    </md-tab-label>
+                    <md-tab-body>
+                        <ng-include src="n.url"></ng-include>
+                    </md-tab-body>
+
+                </md-tab>
+            </md-tabs>
+        </md-content>
+
+
+    </div>
+</div>

@@ -1,14 +1,16 @@
-/**
- *  @author mark
- *  @date 2015/10/30
- *  @version 0.1
- */
-
-$(document).ready(function(){
-	$(".button-collapse").sideNav();
+// 未使用, 只是个模版
+tinymce.init({
+    selector: 'textarea',
+    //skin: 'light',
+    height: 400,
+    width: '95%',
+    plugins: 'code link textcolor colorpicker fullpage',
+    toolbar: 'undo redo | styleselect | bold italic | forecolor backcolor link fullpage',
+    language: 'zh_CN',
+    /* link */
+    default_link_target: '_blank',
+    link_assume_external_targets: true,
+    /* fullpage */
+    fullpage_default_encoding: 'UTF-8',
+    fullpage_default_fontsize: '16px'
 });
-
-//if you are adding these dynamically, you can use this to initialize them.
-$(document).ready(function() {
-    $('input#input_text, textarea#textarea1').characterCounter();
-  });

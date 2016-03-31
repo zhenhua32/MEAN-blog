@@ -1,0 +1,13 @@
+<form name="pageForm" ng-controller="saveC" ng-submit="save()" layout="column" layout-align="center center">
+    <md-input-container style="width: 60%">
+        <label>标题</label>
+        <input name="title" ng-model="newPage.title" required md-maxlength="30">
+    </md-input-container>
+
+    <textarea ui-tinymce="tinymceOptions" name="content" ng-model="newPage.content"></textarea>
+
+    <md-button class="md-raised md-accent" type="submit" ng-disabled="!newPage.title || !newPage.content">
+        <md-icon md-font-set="material-icons">done</md-icon>
+        发布
+    </md-button>
+</form>
