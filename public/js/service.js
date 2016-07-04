@@ -47,6 +47,7 @@ markService.factory('loginS', ['$http', '$location', '$mdToast',
                 if (response.data.success) {
                     $location.path('/main');
                     $mdToast.showSimple('登录成功!');
+                    //可以尝试在登录成功的时候调用getSessionS函数
 
                 } else {
                     $mdToast.showSimple(response.data.message);
@@ -58,13 +59,14 @@ markService.factory('loginS', ['$http', '$location', '$mdToast',
     }
 ]);
 
-markService.factory('logoutS', ['$http', '$location', '$mdToast',
-    function($http, $location, $mdToast) {
+markService.factory('logoutS', ['$http', '$location', '$mdToast','$rootScope',
+    function($http, $location, $mdToast, $rootScope) {
         return function() {
             $http.get('/api/logout').then(function successCallback(response) {
                 if (response.data.success) {
                     $location.path('/login');
                     $mdToast.showSimple('注销成功!');
+                    $rootScope.session = null;
                 }
             }, function errorCallback(response) {
                 $mdToast.showSimple('网络错误或服务器连不上, 稍后再试');
@@ -84,15 +86,19 @@ markService.factory('saveS', ['$http', '$mdToast',
                     content: content
                 }
             };
-            $http(request).then(function successCallback(response) {
-                if (response.data.success) {
-                    $mdToast.showSimple('新文章已保存!');
-                } else {
-                    $mdToast.showSimple(response.data.message);
-                }
-            }, function errorCallback(response) {
-                $mdToast.showSimple('网络错误或服务器连不上, 稍后再试');
-            });
+            return $http(request);
+            // $http(request).then(function successCallback(response) {
+            //     if (response.data.success) {
+            //         $mdToast.showSimple('新文章已保存!');
+            //         return true;
+            //     } else {
+            //         $mdToast.showSimple(response.data.message);
+            //         return fasle;
+            //     }
+            // }, function errorCallback(response) {
+            //     $mdToast.showSimple('网络错误或服务器连不上, 稍后再试');
+            //     return false;
+            // });
         }
     }
 ]);
