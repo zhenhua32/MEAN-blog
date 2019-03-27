@@ -29,7 +29,7 @@
     "kerberos": "0.0.17",
     "mongodb": "^2.1.2",
     "mongoose": "^4.4.6",
-    "morgan": "~1.6.1",
+    "morgan": ">=1.9.1",
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
